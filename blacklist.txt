@@ -1,0 +1,13 @@
+## This file contains a list of default folders to ignore
+## DO NOT REMOVE THE FILE
+## Instead, remove every item, if needed
+
+Accessibility
+Accessories
+Administrative Tools
+Maintenance
+StartUp
+Startup
+System Tools
+Windows Kits
+Windows PowerShell
