@@ -5,6 +5,7 @@ from colorama import Fore, Back, Style, init, deinit
 from sys import platform #, executable, argv
 from math import floor
 from shutil import rmtree
+import logging
 
 
 # CLS()
@@ -224,6 +225,7 @@ def thatswhatshesaid():
 # get what command was entered
 
 def command(input, files, index, folder, folders):
+    logging.info(f'command => {input}')
     if input == []:
         input = ['']
     match input[0]:
@@ -255,6 +257,7 @@ def additem(input, files, index):
             int(input[1])
             try:
                 rename(filewpath, '/'.join((cut(filewpath), filename)))
+                logging.info(f'moved -> {filewpath} | to -> {"/".join((cut(filewpath), filename))}')
             except:
                 return 'Moving file failed (most likely lack of permissions)'
         except:
@@ -268,6 +271,7 @@ def additem(input, files, index):
                 return 'Incorrect index (index out of range)'
             try:
                 rename(filewpath, '/'.join((cut(filewpath), file)))
+                logging.info(f'moved -> {filewpath} | to -> {"/".join((cut(filewpath), file))}')
             except:
                 return 'Moving file failed (most likely lack of permissions)'
         return f'Moved {len(files)} file(s) out'
@@ -287,6 +291,7 @@ def delitem(input, files, index, folder, folders):
             int(input[1])
             try:
                 remove(filewpath)
+                logging.info(f'deleted -> {filewpath}')
             except:
                 return 'Deleting file failed (most likely lack of permissions)'
         except:
@@ -295,6 +300,7 @@ def delitem(input, files, index, folder, folders):
     else:                   # if index wasn't provided
         try:
             rmtree(folders[folder])
+            logging.info(f'deleted -> {folders[folder]}')
             return -2
         except:
             return 'Deleting folder failed (most likely lack of permissions)'
@@ -368,6 +374,7 @@ def mainloop():
 # entrypoint
 
 if __name__ == "__main__":
+    logging.basicConfig(filename='processes.log', encoding='utf-8', format='[%(asctime)s] %(message)s')
     init()
     checkos()
     # windll.shell32.ShellExecuteW(None, 'runas', executable, ' '.join(argv), None, None)
